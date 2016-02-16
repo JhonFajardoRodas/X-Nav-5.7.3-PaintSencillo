@@ -1,7 +1,8 @@
 /* Asociamos función canvasApp a carga de página */
-window.addEventListener('load', canvasApp, false);	
-
-function canvasApp(){  
+window.addEventListener('load', canvasApp, false);
+//radio = 7;
+function canvasApp(){
+	var radio = 7;
     /* Inicializamos el canvas */
 	var theCanvas = document.getElementById('canvas');
 	var context = theCanvas.getContext('2d');
@@ -28,6 +29,17 @@ function canvasApp(){
 	  colorChosen.innerHTML = color_id;
     }
 
+	var largeButton = document.getElementById("large");
+		largeButton.addEventListener('click', changeSize, false);
+		function changeSize(e){
+			radio = 30;
+		}
+
+		var shortButton = document.getElementById("short");
+			shortButton.addEventListener('click', changeSizeS, false);
+			function changeSizeS(e){
+				radio = 7;
+			}
     /* Botón de reseteo */
 	var resetButton = document.getElementById("reset_image");
     resetButton.addEventListener('click', resetPressed, false);
@@ -59,14 +71,17 @@ function canvasApp(){
     }
 
     function mouse_moved(ev) {
-	  var x, y;	
+	  var x, y;
 	  // Get the mouse position in the canvas
 	  x = ev.pageX;
+		console.log("x " + x);
 	  y = ev.pageY;
+		console.log("y " + y);
+
 
 	  if (begin_drawing) {
 	    context.beginPath();
-	    context.arc(x, y, 7, (Math.PI/180)*0, (Math.PI/180)*360, false);
+	    context.arc(x - 10 , y - 85, radio, (Math.PI/180)*0, (Math.PI/180)*360, false);
 	    context.fill();
         context.closePath();
 	  }
